@@ -100,10 +100,10 @@ public class BezerkWindow extends JFrame{
 	    double moveRight=13.5;
 	    double moveUpY=-13.5;
 	    double moveDowny=13.5;
-	    int xStart=50;
+	    int xStart=20;
 	    int yStart=250;
        JLabel stickManOne=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingEast.png"));
-       JPanel gamePanel=new JPanel();
+       WallPanel gamePanel=new WallPanel();
        gamePanel.setBackground(Color.BLACK);
        gamePanel.setLayout(null);
        contentPane.add(gamePanel);
@@ -131,7 +131,7 @@ public class BezerkWindow extends JFrame{
        
        
        
-       for(int i=0; i <5;i++){
+       for(int i=0; i <4;i++){
     	   try {
 				TimeUnit.MILLISECONDS.sleep(333);
 			} catch (InterruptedException e) {
