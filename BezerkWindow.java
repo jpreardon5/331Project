@@ -87,8 +87,62 @@ public class BezerkWindow extends JFrame{
 		//Takes it to the game window. -Taylor
 		contentPane.removeAll();
 		contentPane.add(introScreen);
-		setVisible(true);
+		setVisible(true);//Creates a sleep(), timer till next screen.
+				try {
+					TimeUnit.SECONDS.sleep(0);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+		contentPane.remove(introScreen);
+		double moveLeft=-13.5;
+	    double moveRight=13.5;
+	    double moveUpY=-13.5;
+	    double moveDowny=13.5;
+	    int xStart=50;
+	    int yStart=250;
+       JLabel stickManOne=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingEast.png"));
+       JPanel gamePanel=new JPanel();
+       gamePanel.setBackground(Color.BLACK);
+       gamePanel.setLayout(null);
+       contentPane.add(gamePanel);
+       setVisible(true);
+       int x=stickManOne.getX();
+       int y=stickManOne.getY();
+       System.out.println(x+" "+y);
+       stickManOne.setLocation(xStart, yStart);
+       gamePanel.add(stickManOne);
+       stickManOne.setSize(51,71);
+       JLabel life=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
+       JLabel lifeTwo=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
+       JLabel lifeThree=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
+       gamePanel.add(life);
+       gamePanel.add(lifeTwo);
+       gamePanel.add(lifeThree);
+       life.setLocation(25,500);
+       life.setSize(58,51);
+       lifeTwo.setLocation(75,500);
+       lifeTwo.setSize(58,51);
+       lifeThree.setLocation(125,500);
+       lifeThree.setSize(58,51);
+       
+       setVisible(true);
+       
+       
+       
+       for(int i=0; i <5;i++){
+    	   try {
+				TimeUnit.MILLISECONDS.sleep(333);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	   xStart+=moveRight;
+    	  
+    	   stickManOne.setLocation(xStart,yStart);
+       }
 	}
 		
+		
 	}
-
