@@ -27,17 +27,9 @@ public class WallPanel extends JPanel{
 		screen.setBackground(Color.BLACK);
 	}
 	public void paintComponent (Graphics g){
-		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.fillRect(10, 10, 7, 325);   //left wall
-		g.fillRect(560,10,7,325);		//right wall
-		g.fillRect(10, 10,225,7);		//top-left
-		g.fillRect(345, 10, 218, 7);	//top-right
-		g.fillRect(10, 330, 225, 7);	//b-left
-		g.fillRect(345,330,222,7);		//b-right
-		g.fillRect(110,110,7,125);		//left wall of I
-		g.fillRect(110,172,350,7);		//rt wall
-		g.fillRect(460, 110, 7, 125);	//middle wall of I
+	super.paintComponent(g);
+		Wall wall1 = new Wall(new Point(0,0));
+		wall1.draw(g);
 		
 
 		
