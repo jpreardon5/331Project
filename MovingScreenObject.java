@@ -14,12 +14,7 @@ public abstract class MovingScreenObject extends ScreenObjects {
 	/**
 	 * 
 	 */
-	public MovingScreenObject(Point location) {
-		super(location);
-	}
-	public MovingScreenObject(int x, int y) {
-		super(x,y);
-	}
+
 	public MovingScreenObject(Point location, int length, int width){
 		super(location,length,width);
 	}
@@ -42,3 +37,4 @@ public abstract class MovingScreenObject extends ScreenObjects {
 	public abstract void move();
 
 }
+
