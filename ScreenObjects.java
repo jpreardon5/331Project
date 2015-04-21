@@ -11,14 +11,14 @@ import java.awt.Point;
  */
 public abstract class ScreenObjects {
 	Point location;
-	int length;
+	int height;
 	int width;
 	
 	/**
-	 * @param length the length to set
+	 * @param height the height to set
 	 */
-	public void setLength(int length) {
-		this.length = length;
+	public void setLength(int height) {
+		this.height = height;
 	}
 	/**
 	 * @param width the width to set
@@ -26,15 +26,14 @@ public abstract class ScreenObjects {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-	public ScreenObjects(Point location){
-		this.location=location;
-	}
-	public ScreenObjects(int x, int y){
-		location = new Point(x,y);
-	}
-	public ScreenObjects(Point location, int length, int width){
+	public ScreenObjects(Point location, int height, int width){
 		this.location = location;
-		this.length = length;
+		this.height = height;
+		this.width = width;
+	}
+	public ScreenObjects(int x, int y, int height, int width){
+		this.location = new Point(x,y);
+		this.height = height;
 		this.width = width;
 	}
 	/**
@@ -51,17 +50,17 @@ public abstract class ScreenObjects {
 		this.location = location;
 	}
 	/**
-	 * @return the length
+	 * @return the height
 	 */
 	public int getLength() {
-		return length;
+		return height;
 	}
 	/**
-	 * @param length the length to set
+	 * @param height the height to set
 	 * @param width the width to set
 	 */
-	public void setSize(int length, int width){
-		this.length = length;
+	public void setSize(int height, int width){
+		this.height = height;
 		this.width = width;
 	}
 	/**
