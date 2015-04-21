@@ -13,16 +13,13 @@ public abstract class StaticScreenObject extends ScreenObjects {
 	/**
 	 * 
 	 */
-	public StaticScreenObject(Point location) {
-		super(location);
-	}
-	public StaticScreenObject(int x, int y){
-		super(x,y);
-	}
-	public StaticScreenObject(Point location, int length, int width){
-		super(location,length,width);
+	public StaticScreenObject(Point location, int height, int width){
+		super(location,height,width);
 	}
 	
+	public StaticScreenObject(int x, int y, int height, int width) {
+		super(x,y,height,width);
+	}
 	public abstract void draw(Graphics g);
 	
 	
