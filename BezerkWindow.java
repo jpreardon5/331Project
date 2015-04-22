@@ -4,6 +4,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,17 +33,50 @@ import javax.swing.JPanel;
  * @author Chapp Brown
  *
  */
-public class BezerkWindow extends JFrame{
+public class BezerkWindow extends JFrame implements KeyListener{
 
 	/**
 	 * @param args
 	 */
 	private final int window_ht = 500;
 	private final int window_width = 500;
+	private javax.swing.Timer timer;
+	double moveLeft=-12.5;
+    double moveRight=12.5;
+    double moveUpY=-12.5;
+    double moveDownY=12.5;
+    int xStart=50;
+    int yStart=275;
+    int xDest=50;
+    int yDest=275;
+    boolean r1Dead=false;
+    boolean r2Dead=false;
+    boolean r3Dead=false;
+    
+    JLabel stickManOne=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingEast.png"));
+    JLabel otto=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/evilOttoRed.png"));
+	JLabel robot1=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png"));
+	JLabel robot2=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png"));
+	JLabel robot3=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png"));
+    JLabel bullet=new JLabel("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletNorthSouth.png");
+    JLabel bullet2=new JLabel("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletEastWest.png");
+    JLabel life=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
+    JLabel lifeTwo=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
+    JLabel lifeThree=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
+    
+    ImageIcon explosionGif=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/explosion.gif");
+    ImageIcon stickmanLookingEast=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingEast.png");
+    ImageIcon stickmanRunningEast=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanRunningEast.png");
+    ImageIcon stickmanLookingWest=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingWest.png");
+    ImageIcon stickmanRunningWest=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanRunningWest.png");
+    ImageIcon bulletEastWest=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletEastWest.png");
+    ImageIcon bulletNorthSouth=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletNorthSouth.png");
+    ImageIcon robotGoingEast=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotGoingEast.png");
+    ImageIcon robotGoingNorth=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotGoingNorth.png");
+    ImageIcon robotStandingStill=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png");
+
 	
-	
-	
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		@SuppressWarnings("unused")
 		BezerkWindow bezerk = new BezerkWindow();
 
@@ -53,7 +90,10 @@ public class BezerkWindow extends JFrame{
 		JPanel screen = new JPanel();
 		screen.setPreferredSize(new Dimension(window_ht,window_width));
 		screen.setBackground(Color.BLACK);
-		
+		this.addKeyListener(this);
+
+		timer = new javax.swing.Timer(30, new TimerListener());
+		timer.start();
 		//You will have to change the directory for this to work.
 		//Easiest way to attack images is to labels.
 		JLabel introScreen=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/title_screen.png"));
@@ -77,7 +117,7 @@ public class BezerkWindow extends JFrame{
 		    }
 		 //Creates a sleep(), timer till next screen.
 			try {
-				TimeUnit.SECONDS.sleep(2);
+				TimeUnit.SECONDS.sleep(0);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -96,7 +136,7 @@ public class BezerkWindow extends JFrame{
 		}
 		//Creates a sleep(), timer till next screen.
 				try {
-					TimeUnit.SECONDS.sleep(5);
+					TimeUnit.SECONDS.sleep(0);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -107,62 +147,15 @@ public class BezerkWindow extends JFrame{
 		setVisible(true);
 		//Creates a sleep(), timer till next screen.
 				try {
-					TimeUnit.SECONDS.sleep(5);
+					TimeUnit.SECONDS.sleep(0);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		
 		contentPane.remove(introScreen);
-		double moveLeft=-12.5;
-	    double moveRight=12.5;
-	    double moveUpY=-12.5;
-	    double moveDownY=12.5;
-	    int xStart=50;
-	    int yStart=250;
-	    boolean r1Dead=false;
-	    boolean r2Dead=false;
-	    boolean r3Dead=false;
-	   
-	   JLabel otto=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/evilOttoRed.png"));
-	   JLabel robot1=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png"));
-	   JLabel robot2=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png"));
-	   JLabel robot3=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png"));
-       JLabel stickManOne=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingEast.png"));
-       JLabel bullet=new JLabel("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletNorthSouth.png");
-       JLabel bullet2=new JLabel("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletEastWest.png");
-       JLabel life=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
-       JLabel lifeTwo=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
-       JLabel lifeThree=new JLabel(new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/Life.png"));
-       
-       //Jlabel icon switches.
-       ImageIcon robotGoingEast;
-       ImageIcon robotGoingNorth;
-       ImageIcon robotStandingStill;
-       ImageIcon bulletNorthSouth;
-       ImageIcon bulletEastWest;
-       ImageIcon stickmanRunningWest;
-       ImageIcon stickmanLookingWest;
-       ImageIcon stickmanRunningEast;
-       ImageIcon stickmanLookingEast;
-       ImageIcon explosionGif;
-      
-       
-       
-       explosionGif=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/explosion.gif");
-    
-       stickmanLookingEast=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingEast.png");
-	   stickmanRunningEast=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanRunningEast.png");
-       stickmanLookingWest=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanLookingWest.png");
-	   stickmanRunningWest=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/stickmanRunningWest.png");
-       bulletEastWest=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletEastWest.png");
-	   bulletNorthSouth=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/bulletNorthSouth.png");
-       robotGoingEast=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotGoingEast.png");
-       robotGoingNorth=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotGoingNorth.png");
-       robotStandingStill=new ImageIcon("C:/Users/taylor/Desktop/workspace2/Berzerk/robotStandingStill.png");
-       
-	   
-       JPanel gamePanel=new JPanel();
+
+       JPanel gamePanel=new WallPanel();
        gamePanel.setBackground(Color.BLACK);
        gamePanel.setLayout(null);
        contentPane.add(gamePanel);
@@ -194,8 +187,8 @@ public class BezerkWindow extends JFrame{
 
        //Sets the location for the icons.
        life.setLocation(25,500);
-       lifeTwo.setLocation(83,500);
-       lifeThree.setLocation(141,500);
+       lifeTwo.setLocation(60,500);
+       lifeThree.setLocation(95,500);
        stickManOne.setLocation(xStart, yStart);
        robot1.setLocation(xStart+67,yStart);
        robot2.setLocation(xStart+134,yStart);
@@ -216,6 +209,7 @@ public class BezerkWindow extends JFrame{
        int ox1=otto.getX();
        int oy1=otto.getY();
        
+       
      //Plays Audio, Only works for .wav format. All clips are in .wav.
 	   try {
 	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:/Users/taylor/Desktop/workspace2/Berzerk/b-alert.wav"));
@@ -226,9 +220,9 @@ public class BezerkWindow extends JFrame{
 	        System.out.println("Error with playing sound.");
 	        ex.printStackTrace();
 	    }
-       
-	   //test move east
-       for(int i=0; i <5;i++){
+	   
+	   //Robot1 move east
+       for(int i=0; i <15;i++){
     	   try {
 				TimeUnit.MILLISECONDS.sleep(300);
 			} catch (InterruptedException e) {
@@ -236,51 +230,21 @@ public class BezerkWindow extends JFrame{
 				e.printStackTrace();
 			}
     	   xStart+=moveRight;
-    	   stickManOne.setIcon(stickmanRunningEast);
-    	   stickManOne.setLocation(xStart,yStart);
+    	  
     	   //testing robot movement. Do the Boogie Woogie.
     	   robot1.setIcon(robotGoingEast);
     	   robot1.setLocation(xStart+67, yStart);
-    	   robot2.setIcon(robotGoingEast);
+    	   /**robot2.setIcon(robotGoingEast);
     	   robot2.setLocation(xStart+134, yStart);
     	   robot3.setIcon(robotGoingEast);
-    	   robot3.setLocation(xStart+201, yStart);
+    	   robot3.setLocation(xStart+201, yStart);**/
        }
-       stickManOne.setIcon(stickmanLookingEast);
+      
        robot1.setIcon(robotStandingStill);
        robot2.setIcon(robotStandingStill);
        robot3.setIcon(robotStandingStill);
-       
-       //test move west
-       for(int i=0; i <5;i++){
-    	   try {
-				TimeUnit.MILLISECONDS.sleep(300);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	   xStart+=moveLeft;
-    	   stickManOne.setIcon(stickmanRunningWest);
-    	   stickManOne.setLocation(xStart,yStart);
-       }
-       stickManOne.setIcon(stickmanLookingWest);
-       
-       //test move north
-       for(int i=0; i <5;i++){
-    	   try {
-				TimeUnit.MILLISECONDS.sleep(300);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	   yStart+=moveUpY;
-    	   stickManOne.setIcon(stickmanRunningEast);
-    	   stickManOne.setLocation(xStart,yStart);
-       }
-       stickManOne.setIcon(stickmanLookingEast);
-       
-       //test move south
-       for(int i=0; i <5;i++){
+       //robot1 move south
+       for(int i=0; i <10;i++){
     	   try {
 				TimeUnit.MILLISECONDS.sleep(300);
 			} catch (InterruptedException e) {
@@ -288,12 +252,42 @@ public class BezerkWindow extends JFrame{
 				e.printStackTrace();
 			}
     	   yStart+=moveDownY;
-    	   stickManOne.setIcon(stickmanRunningWest);
-    	   stickManOne.setLocation(xStart,yStart);
+    	   robot1.setIcon(robotStandingStill);
+    	   robot1.setLocation(xStart+67, yStart);
+    	  
        }
-       stickManOne.setIcon(stickmanLookingWest);
+     //robot1 move west
+       for(int i=0; i <20;i++){
+    	   try {
+				TimeUnit.MILLISECONDS.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	   xStart+=moveLeft;
+    	   robot1.setIcon(robotStandingStill);
+    	   robot1.setLocation(xStart+67, yStart);
+    
+       }
 	    x=stickManOne.getX();
         y=stickManOne.getY();
+        
+        
+        //robot1 move north
+        for(int i=0; i <25;i++){
+     	   try {
+ 				TimeUnit.MILLISECONDS.sleep(300);
+ 			} catch (InterruptedException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+     	   yStart+=moveUpY;
+     	   robot1.setIcon(robotStandingStill);
+    	   robot1.setLocation(xStart+67, yStart);
+        }
+       
+        x=robot1.getX();
+        y=robot1.getY();
        //test fire north
        for(int i=0; i <25;i++){
     	   try {
@@ -321,7 +315,7 @@ public class BezerkWindow extends JFrame{
     	   bullet.setIcon(bulletNorthSouth);
     	   bullet.setLocation(x,y);
        }
-       bullet.setVisible(false);
+       //bullet.setVisible(false);
        x=stickManOne.getX();
        y=stickManOne.getY();
        //test fire east
@@ -383,6 +377,121 @@ public class BezerkWindow extends JFrame{
        }
        bullet2.setVisible(false);
       
+	}
+	private class TimerListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			if (bullet.isVisible()){
+				int x=stickManOne.getX();
+				int y=stickManOne.getY();
+				x+=moveRight;
+				bullet.setIcon(bulletEastWest);
+				
+				bullet.setLocation(x,y);
+				int hasd=bullet.getX();
+				System.out.println(hasd);
+				
+			}
+		}
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int code=e.getKeyCode();
+		//UP KEY
+		if(code==KeyEvent.VK_UP){
+			yDest+=moveUpY;
+	    	   stickManOne.setIcon(stickmanRunningEast);
+	    	   stickManOne.setLocation(xDest,yDest);  
+	    	 
+		}
+		//DOWN KEY
+		if(code==KeyEvent.VK_DOWN){
+			   yDest+=moveDownY;
+	    	   stickManOne.setIcon(stickmanRunningEast);
+	    	   stickManOne.setLocation(xDest,yDest);
+		}
+		//LEFT KEY
+				if(code==KeyEvent.VK_LEFT){
+					   xDest+=moveLeft;
+			    	   stickManOne.setIcon(stickmanRunningWest);
+			    	   stickManOne.setLocation(xDest,yDest);
+				}
+		//LEFT KEY
+		if(code==KeyEvent.VK_RIGHT){
+					   xDest+=moveRight;
+			    	   stickManOne.setIcon(stickmanRunningEast);
+			    	   stickManOne.setLocation(xDest,yDest);
+				}	
+		//ALT FIRE KEY
+		if(code==KeyEvent.VK_ALT){
+			
+			int x=stickManOne.getX();
+			int y=stickManOne.getY();
+	        if(stickManOne.getIcon()==stickmanLookingEast){
+	        	bullet.setIcon(bulletEastWest);
+	        	bullet.setLocation(x,y);
+	        	bullet.setVisible(true);
+	        	int gj=0;
+	        	while(bullet.isVisible()){
+	        		x+=(moveRight/3);
+	        		bullet.setIcon(bulletEastWest);
+	        		bullet.setLocation(x, y);
+	        		gj+=1;
+	        		if(gj>50){
+	        			bullet.setVisible(false);
+	        		}
+	        		
+	        		
+	        	}
+	        	System.out.println("HAI");
+	        	
+	        
+	        }
+	       
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int code=e.getKeyCode();
+		//UP KEY
+		if(code==KeyEvent.VK_UP){
+			
+	    	   stickManOne.setIcon(stickmanLookingEast);
+	    	   stickManOne.setLocation(xDest,yDest);  
+		}
+		
+		//DOWN KEY
+		if(code==KeyEvent.VK_DOWN){
+					   
+			    	   stickManOne.setIcon(stickmanLookingEast);
+			    	   stickManOne.setLocation(xDest,yDest);
+			    	
+				}
+		//LEFT KEY
+		if(code==KeyEvent.VK_LEFT){
+					   
+			    	   stickManOne.setIcon(stickmanLookingWest);
+			    	   stickManOne.setLocation(xDest,yDest);
+				}		
+		//RIGHT KEY
+				if(code==KeyEvent.VK_RIGHT){
+							   
+					    	   stickManOne.setIcon(stickmanLookingEast);
+					    	   stickManOne.setLocation(xDest,yDest);
+						}
+		
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }	
 	
