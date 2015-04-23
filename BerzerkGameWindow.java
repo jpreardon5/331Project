@@ -206,7 +206,7 @@ import javax.swing.JPanel;
 	       setVisible(true);
 	       
 	       JLabel theScore = new JLabel("Score: " + Score);
-	       theScore.setBounds(550,  525, 100, 40);
+	       theScore.setBounds(540,  510, 100, 40);
     	       theScore.setForeground(Color.white);
 	       theScore.setBackground(Color.black);
 	       theScore.setFont(new Font("Serif", Font.BOLD, 20));
