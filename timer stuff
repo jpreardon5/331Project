@@ -1,3 +1,27 @@
+		public void restart(){
+			stickManOne.setIcon(explosionGif);
+			
+//			try{
+//				wait(2000);	
+//			}
+//			catch (Exception e){
+//				e.printStackTrace();
+//			}
+//			try{
+//				TimeUnit.SECONDS.sleep(2);
+//			}
+//			catch (Exception er){
+//				er.printStackTrace();
+//			}
+			if (!lifeThree.isVisible() && !lifeTwo.isVisible() && life.isVisible()) life.setVisible(false);
+			if (!lifeThree.isVisible() && lifeTwo.isVisible()) lifeTwo.setVisible(false);
+			if (lifeThree.isVisible()) lifeThree.setVisible(false);
+//			stickManOne.setIcon(stickmanLookingEast);
+			stickManOne.setLocation(xStart,yStart);
+			stickManOne.setVisible(true);
+		
+				
+		}
 private class TimerListener implements ActionListener {
 
 			@Override
