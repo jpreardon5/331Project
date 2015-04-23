@@ -1,0 +1,126 @@
+private class TimerListener implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			Random rand = new Random();
+			int bulletx = bullet.getX();
+			int bullety = bullet.getY();	
+			if (bullet.isVisible()){
+				bulletx = (int) (bulletx + bulletvect.getX());
+				bullety = (int) (bullety + bulletvect.getY());
+				bullet.setLocation(bulletx,bullety);
+				if (bulletx > 800 || bulletx < 0 || bullety > 600 || bullety < 0) bullet.setVisible(false);
+				if (bulletx > 10 && bulletx < 10 + 5 && bullety > 10 && bullety < 10+500) bullet.setVisible(false);
+				if (bulletx > 760 && bulletx < 760 + 10 && bullety > 10 && bullety < 10+500) bullet.setVisible(false);
+				if (bulletx > 10 && bulletx < 10 + 310 && bullety > 10 && bullety < 10+10) bullet.setVisible(false);
+				if (bulletx > 450 && bulletx < 450 + 310 && bullety > 10 && bullety < 10+10) bullet.setVisible(false);
+				if (bulletx > 10 && bulletx < 10 + 310 && bullety > 500 && bullety < 500+10) bullet.setVisible(false);
+				if (bulletx > 450 && bulletx < 450 + 310 && bullety > 500 && bullety < 500+10) bullet.setVisible(false);
+				if (bulletx > 135 && bulletx < 135 + 10 && bullety > 160 && bullety < 160+200) bullet.setVisible(false);
+				if (bulletx > 635 && bulletx < 635 + 10 && bullety > 160 && bullety < 160+200) bullet.setVisible(false);
+				if (bulletx > 135 && bulletx < 135 + 500 && bullety > 225 && bullety < 225+10) bullet.setVisible(false);
+				
+				
+				
+				
+			}
+//			int bullet1x = bullet1.getX();
+//			int bullet1y = bullet1.getY();
+//			if (bullet1.isVisible()){
+//				bullet1x = (int) (bullet1x + bulletvect1.getX());
+//				bullet1y = (int) (bullet1y + bulletvect1.getY());
+//				bullet1.setLocation(bullet1x,bullet1y);
+//				if (bullet1x > 800 || bullet1x < 0 || bullet1y > 600 || bullet1y < 0) bullet1.setVisible(false);
+//				
+//			}
+//			int bullet2x = bullet2.getX();
+//			int bullet2y = bullet2.getY();
+//			if (bullet2.isVisible()){
+//				bullet2x = (int) (bullet2x + bulletvect2.getX());
+//				bullet2y = (int) (bullet2y + bulletvect2.getY());
+//				bullet2.setLocation(bullet2x,bullet2y);
+//				if (bullet2x > 800 || bullet2x < 0 || bullet2y > 600 || bullet2y < 0) bullet2.setVisible(false);
+//				
+//			}
+//			int bullet3x = bullet3.getX();
+//			int bullet3y = bullet3.getY();
+//			if (bullet3.isVisible()){
+//				bullet3x = (int) (bullet3x + bulletvect3.getX());
+//				bullet3y = (int) (bullet3y + bulletvect3.getY());
+//				bullet3.setLocation(bullet3x,bullet3y);
+//				if (bullet3x > 800 || bullet3x < 0 || bullet3y > 600 || bullet3y < 0) bullet3.setVisible(false);
+//				
+//			}
+			int stickX = stickManOne.getX();
+			int stickY = stickManOne.getY();
+			stickX += xMove;
+			stickY += yMove;
+			stickManOne.setLocation(stickX,stickY);
+			int robo1x = robot1.getX();
+			int robo1y = robot1.getY();
+			if (robot1.isVisible()){
+				robo1x = robo1x + robo1changex;
+				robot1.setLocation(robo1x, robo1y);	
+			}
+			if (robot1.isVisible() && count%100 == 1){
+				robo1changex = - (robo1changex);
+			}
+			if (stickX+25 > 10 && stickX < 10 + 5 && stickY+30 > 10 && stickY < 10+500) restart();
+			if (stickX+25 > 760 && stickX < 760 + 10 && stickY+30 > 10 && stickY < 10+500) restart();
+			if (stickX+25 > 10 && stickX < 10 + 310 && stickY+30 > 10 && stickY < 10+10) restart();
+			if (stickX+25 > 450 && stickX < 450 + 310 && stickY+30 > 10 && stickY < 10+10) restart();
+			if (stickX+25 > 10 && stickX < 10 + 310 && stickY+30 > 500 && stickY < 500+10) restart();
+			if (stickX+25 > 450 && stickX < 450 + 310 && stickY+30 > 500 && stickY < 500+10) restart();
+			if (stickX+25 > 135 && stickX < 135 + 10 && stickY+30 > 160 && stickY < 160+200) restart();
+			if (stickX+25 > 635 && stickX < 635 + 10 && stickY+30 > 160 && stickY < 160+200) restart();
+			if (stickX+25 > 135 && stickX < 135 + 500 && stickY+30 > 225 && stickY < 225+10) restart();
+			//not working
+//			if (robot1.isVisible() && !bullet1.isVisible()){
+//				bullet1.setLocation(robo1x,robo1y);
+//				bullet1.setIcon(bulletEastWest);
+//				bullet1.setVisible(true);
+//				if (robo1x - stickX > 0)bulletvect1 = new Point(-12,0);
+//				else bulletvect1 = new Point(12,0);	
+//			}
+			
+			if (bulletx <= robo1x+60 && bulletx >= robo1x && bullety <= robo1y+84 && bullety>= robo1y){
+				robot1.setVisible(false);
+				bullet.setVisible(false);
+				robot1.setLocation(0,0);
+			}
+			int robo2x = robot2.getX();
+			int robo2y = robot2.getY();
+			if (robot2.isVisible()){
+				robo2x = robo2x + robo2changex;
+				robot2.setLocation(robo2x, robo2y);	
+			}
+			if (robot2.isVisible() && count%180 == 1){
+				robo2changex = - (robo2changex);
+			}
+			
+			if (bulletx <= robo2x+60 && bulletx >= robo2x && bullety <= robo2y+84 && bullety>= robo2y){
+				robot2.setVisible(false);
+				bullet.setVisible(false);
+				robot2.setLocation(0,0);
+			}	
+			int robo3x = robot3.getX();
+			int robo3y = robot3.getY();
+			if (robot3.isVisible()){
+				robo3x = robo3x + robo3changex;
+				robot3.setLocation(robo3x, robo3y);	
+			}
+			if (robot3.isVisible() && count%130 == 1){
+				robo3changex = - (robo3changex);
+			}
+			
+			if (bulletx <= robo3x+60 && bulletx >= robo3x && bullety <= robo3y+84 && bullety>= robo3y){
+				robot3.setVisible(false);
+				bullet.setVisible(false);
+				robot3.setLocation(0,0);
+			}
+			count ++;
+			}
+				
+			}
+	
+			
