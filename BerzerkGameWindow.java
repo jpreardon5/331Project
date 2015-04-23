@@ -447,6 +447,7 @@ import javax.swing.JPanel;
 				robot3.setLocation(0,0);
 			}
 			count ++;
+			Score +=5;
 			}
 				
 			}
